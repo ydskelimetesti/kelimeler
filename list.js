@@ -565,68 +565,68 @@ export const wordList = [
   { english: "massacre", turkish: "katliam", synonym: "slaughter", example: "The new policy addresses the impact of massacre in modern society." },
   { english: "massive", turkish: "çok büyük ve ağır", synonym: "large", example: "The new policy addresses the impact of massive in modern society." },
   { english: "mat", turkish: "paspas", synonym: "mop", example: "The new policy addresses the impact of mat in modern society." },
-  { english: "mate", turkish: "arkadaş", synonym: "friend", example: "The new policy addresses the impact of mate in modern society." }
-  { english: "strange", turkish: "tuhaf", synonym: "odd", example: "Bugün ikimizin de aynı gömleği giymiş olması garip bir tesadüftü" }
-  { english: "injure", turkish: "yaralanmak", synonym: "odd", example: "Dünkü futbol maçında dizinden yaralandı." }
-  { english: "pressure", turkish: "baskı", synonym: "pressure", example: "Sınav yaklaştıkça üzerindeki baskı daha da artmaya başladı." }
-  { english: "epidemic", turkish: "salgın", synonym: "contagious", example: "Hijyen kurallarına uymak, bulaşıcı salgınların önüne geçmedeki en etkili yöntemdir." }
-  { english: "consequence", turkish: "sonuç", synonym: "pressure", example: "Sınavın sonuçları açıklanınca herkes derin bir nefes aldı." }
-  { english: "defect", turkish: "kusur", synonym: "pressure", example: "Kazada karşı tarafın asli kusurlu olduğu polis raporuyla kesinleşti." }
-  { english: "give up", turkish: "vazgeçmek", synonym: "forego", example: "Bütün engellere rağmen hedeflerinden asla vazgeçmedi." }
-  { english: "waste", turkish: "boşa harcamak", synonym: "forego", example: "Bütün günü sosyal medyada gezinerek boşa harcadı." }
-  { english: "reject", turkish: "reddetmek", synonym: "refuse", example: "Şirketten gelen cazip iş teklifini nazikçe reddetti." }
-  { english: "generally", turkish: "genellikle", synonym: "in general", example: "Hafta sonları genellikle erken kalkıp uzun bir yürüyüşe çıkarım." }
-  { english: "occasionally", turkish: "ara ara", synonym: "sometimes", example: "Yıllar geçmesine rağmen o güzel günleri ara ara hatırlar ve gülüserim." }
-  { english: "rarely", turkish: "nadiren", synonym: "seldom", example: "Sağlık sorunları dışında toplantılarını nadiren aksatır." }
-  { english: "look for", turkish: "aramak", synonym: "research", example: "Günlerdir kaybettiği önemli evrakı her yerde arıyor." }
-  { english: "urban", turkish: "kentsel", synonym: "urban", example: "Kediler kentsel alanlarda kolayca yaşar." }
-  { english: "prohibit", turkish: "yasaklamak", synonym: "proscribe", example: "Doktor, tatlı yemesini yasakladı." }
-  { english: "infrared", turkish: "kızılötesi", synonym: "infrared", example: "Gece görüş kameraları kızılötesi ışık kullanır." }
-  { english: "rural", turkish: "kırsal", synonym: "rustic", example: "Kırsal alanlarda hava çok temizdir." }
-  { english: "dormitory", turkish: "yurt", synonym: "dormitory", example: "Öğrenciler yeni öğretim yılında yurtta kalacak." }
-  { english: "underestimate", turkish: "önemsememek", synonym: "underestimate", example: "Söylenen kötü sözleri hiç önemsemedi." }
-  { english: "pollution", turkish: "kirlilik", synonym: "pollution", example: "Fabrikalar hava kirliliğine neden olur." }
-  { english: "suffer", turkish: "acı çekmek", synonym: "be in pain", example: "Hastalığı yüzünden aylarca acı çekti." }
-  { english: "assignment", turkish: "ödev", synonym: "homework", example: "Zor ödevler için arkadaşımdan yardım istedim." }
-  { english: "anchorman", turkish: "sunucu", synonym: "anchorman", example: "Televizyon sunucusu programı neşeyle başlattı." }
-  { english: "exact", turkish: "aynı", synonym: "exact", example: "İki elbisenin rengi ve kesimi birebir aynı." }
-  { english: "measure", turkish: "tedbir", synonym: "precaution", example: "Virüse karşı gerekli tedbirleri aldık." }
-  { english: "raise", turkish: "artırmak", synonym: "increase", example: "Spor yapmak vücut direncini artırır." }
-  { english: "deer", turkish: "geyik", synonym: "deer", example: "Ormanda aniden güzel bir geyik belirdi." }
-  { english: "recently", turkish: "şimdiye kadar", synonym: "until now", example: "Şimdiye kadar okuduğum en etkileyici kitaptı." }
-  { english: "approve", turkish: "onaylamak", synonym: "confirm", example: "Üyeliğinizi tamamlamak için gelen e-postayı onaylamanız gerekiyor." }
-  { english: "diagnose", turkish: "teşhis etmek", synonym: "diagnose", example: "Erken aşamada teşhis edilen rahatsızlıkların tedavisi daha kolaydır." }
-  { english: "recruit", turkish: "işe almak", synonym: "recruit", example: "Şirket yeni proje için üç yazılımcı işe aldı." }
-  { english: "decline", turkish: "azalmak", synonym: "decrease", example: "Son birkaç yılda hava kirliliği oranı belirgin şekilde azaldı." }
-  { english: "crowd", turkish: "kalabalık", synonym: "horde", example: "Meydandaki kalabalık konser başladıktan sonra iyice arttı." }
-  { english: "choose", turkish: "seçmek", synonym: "select", example: "Yarın yapılacak seçimde yeni sınıf başkanını seçeceğiz." }
-  { english: "thief", turkish: "hırsız", synonym: "burglar", example: "Gece vakti dükkana giren hırsız alarm çalınca kaçtı." }
-  { english: "aware of", turkish: "farkında olmak", synonym: "aware of", example: "Yaptığı hatanın büyüklüğünün sonradan farkında oldu." }
-  { english: "responsibility", turkish: "sorumluluk", synonym: "liability", example: "Yeni projenin tüm sorumluluğunu üzerine aldı." }
-  { english: "extinction", turkish: "nesli tükenme", synonym: "disappearance", example: "Bilim insanları nesli tükenme riski yüksek olan bitki türlerini koruma altına aldı." }
-  { english: "accident", turkish: "kaza", synonym: "crash", example: "Otoyolda meydana gelen kaza yüzünden trafik saatlerce aksadı." }
-  { english: "discuss", turkish: "tartışmak", synonym: "debate", example: "İki uzman canlı yayında ekonomi politikalarını tartıştı." }
-  { english: "expect", turkish: "ummak", synonym: "hope", example: "Bütün bu çabalarımızın karşılığını yakın zamanda almayı umuyorum." }
-  { english: "patient", turkish: "hasta", synonym: "case", example: "Hasta adam ilaçlarını aldıktan sonra dinlenmeye çekildi." }
-  { english: "establish", turkish: "kurmak", synonym: "set up", example: "İki girişimci ortak olarak yeni bir şirket kurdu." }
-  { english: "inform", turkish: "bilgi vermek", synonym: "acquaint", example: "Müşteri temsilcisi yeni kampanya hakkında detaylı bilgi verdi." }
-  { english: "blow", turkish: "esmek", synonym: "blow", example: "Gece boyunca denizden tatlı ve serin bir rüzgâr esti." }
-  { english: "rest", turkish: "dinlenme", synonym: "relaxation", example: "Yoğun geçen bir haftanın ardından iyi bir dinlenme şart oldu." }
-  { english: "submit", turkish: "teslim etmek", synonym: "deliver", example: "Kargo görevlisi paketi eve teslim etti." }
-  { english: "mend", turkish: "tamir etmek", synonym: "repair", example: "Ustalar bozulan çamaşır makinesini tamir ediyor." }
-  { english: "distance", turkish: "mesafe", synonym: "distance", example: "İki şehir arasındaki mesafe oldukça uzundu." }
-  { english: "digestive", turkish: "sindirimsel", synonym: "digestive", example: "Yoğurt yemek, sindirimsel sağlığı destekler." }
-  { english: "disorder", turkish: "hastalık", synonym: "illness", example: "Bakteriler, ciddi sindirimsel hastalıklara yol açabilir." }
-  { english: "promote", turkish: "geliştirmek", synonym: "improve", example: "Kendini geliştirmek için her gün yeni bir şeyler öğreniyor." }
-  { english: "side effect", turkish: "yan etki", synonym: "repercussion", example: "Bu ilacın hiçbir yan etkisi yok." }
-  { english: "provide", turkish: "sağlamak", synonym: "ensure", example: "Düzenli uyumak, gün boyu enerjik olmanı sağlar." }
-  { english: "participant", turkish: "katılımcı", synonym: "subscriber", example: "Eğitimi başarıyla tamamlayan her katılımcıya sertifika verildi." }
-  { english: "stem cell", turkish: "kök hücre", synonym: "stem cell", example: "Nakil yapılan kök hücreler, hastanın iyileşme sürecini önemli ölçüde hızlandırdı." }
-  { english: "approach", turkish: "yaklaşmak", synonym: "come close to", example: "Sınav tarihi yaklaştıkça heyecanı daha da arttı." }
-  { english: "attractive", turkish: "çekici", synonym: "appealing", example: "Mıknatısın metaller üzerindeki çekici gücü denetlendi." }
-  { english: "labour", turkish: "emek", synonym: "labour", example: "Büyük bir emek vererek hazırladığı proje ödül kazandı." }
-  { english: "entertaining", turkish: "eğlenceli", synonym: "enjoyable", example: "Dün akşam ailece çok eğlenceli bir film izledik." }
-  { english: "salary", turkish: "maaş", synonym: "wage", example: "Ay başında maaşı yatınca hemen faturaları ödedi." }
-  { english: "carry", turkish: "taşımak", synonym: "transport", example: "Kütüphaneden aldığı ağır kitapları çantasında taşımak onu biraz yordu." }
-  { english: "employee", turkish: "çalışan", synonym: "staff member", example: "Gece vardiyasında çalışan personeller için servis imkanı sunuluyor." }
+  { english: "mate", turkish: "arkadaş", synonym: "friend", example: "The new policy addresses the impact of mate in modern society." },
+  { english: "strange", turkish: "tuhaf", synonym: "odd", example: "Bugün ikimizin de aynı gömleği giymiş olması garip bir tesadüftü" },
+  { english: "injure", turkish: "yaralanmak", synonym: "odd", example: "Dünkü futbol maçında dizinden yaralandı." },
+  { english: "pressure", turkish: "baskı", synonym: "pressure", example: "Sınav yaklaştıkça üzerindeki baskı daha da artmaya başladı." },
+  { english: "epidemic", turkish: "salgın", synonym: "contagious", example: "Hijyen kurallarına uymak, bulaşıcı salgınların önüne geçmedeki en etkili yöntemdir." },
+  { english: "consequence", turkish: "sonuç", synonym: "pressure", example: "Sınavın sonuçları açıklanınca herkes derin bir nefes aldı." },
+  { english: "defect", turkish: "kusur", synonym: "pressure", example: "Kazada karşı tarafın asli kusurlu olduğu polis raporuyla kesinleşti." },
+  { english: "give up", turkish: "vazgeçmek", synonym: "forego", example: "Bütün engellere rağmen hedeflerinden asla vazgeçmedi." },
+  { english: "waste", turkish: "boşa harcamak", synonym: "forego", example: "Bütün günü sosyal medyada gezinerek boşa harcadı." },
+  { english: "reject", turkish: "reddetmek", synonym: "refuse", example: "Şirketten gelen cazip iş teklifini nazikçe reddetti." },
+  { english: "generally", turkish: "genellikle", synonym: "in general", example: "Hafta sonları genellikle erken kalkıp uzun bir yürüyüşe çıkarım." },
+  { english: "occasionally", turkish: "ara ara", synonym: "sometimes", example: "Yıllar geçmesine rağmen o güzel günleri ara ara hatırlar ve gülüserim." },
+  { english: "rarely", turkish: "nadiren", synonym: "seldom", example: "Sağlık sorunları dışında toplantılarını nadiren aksatır." },
+  { english: "look for", turkish: "aramak", synonym: "research", example: "Günlerdir kaybettiği önemli evrakı her yerde arıyor." },
+  { english: "urban", turkish: "kentsel", synonym: "urban", example: "Kediler kentsel alanlarda kolayca yaşar." },
+  { english: "prohibit", turkish: "yasaklamak", synonym: "proscribe", example: "Doktor, tatlı yemesini yasakladı." },
+  { english: "infrared", turkish: "kızılötesi", synonym: "infrared", example: "Gece görüş kameraları kızılötesi ışık kullanır." },
+  { english: "rural", turkish: "kırsal", synonym: "rustic", example: "Kırsal alanlarda hava çok temizdir." },
+  { english: "dormitory", turkish: "yurt", synonym: "dormitory", example: "Öğrenciler yeni öğretim yılında yurtta kalacak." },
+  { english: "underestimate", turkish: "önemsememek", synonym: "underestimate", example: "Söylenen kötü sözleri hiç önemsemedi." },
+  { english: "pollution", turkish: "kirlilik", synonym: "pollution", example: "Fabrikalar hava kirliliğine neden olur." },
+  { english: "suffer", turkish: "acı çekmek", synonym: "be in pain", example: "Hastalığı yüzünden aylarca acı çekti." },
+  { english: "assignment", turkish: "ödev", synonym: "homework", example: "Zor ödevler için arkadaşımdan yardım istedim." },
+  { english: "anchorman", turkish: "sunucu", synonym: "anchorman", example: "Televizyon sunucusu programı neşeyle başlattı." },
+  { english: "exact", turkish: "aynı", synonym: "exact", example: "İki elbisenin rengi ve kesimi birebir aynı." },
+  { english: "measure", turkish: "tedbir", synonym: "precaution", example: "Virüse karşı gerekli tedbirleri aldık." },
+  { english: "raise", turkish: "artırmak", synonym: "increase", example: "Spor yapmak vücut direncini artırır." },
+  { english: "deer", turkish: "geyik", synonym: "deer", example: "Ormanda aniden güzel bir geyik belirdi." },
+  { english: "recently", turkish: "şimdiye kadar", synonym: "until now", example: "Şimdiye kadar okuduğum en etkileyici kitaptı." },
+  { english: "approve", turkish: "onaylamak", synonym: "confirm", example: "Üyeliğinizi tamamlamak için gelen e-postayı onaylamanız gerekiyor." },
+  { english: "diagnose", turkish: "teşhis etmek", synonym: "diagnose", example: "Erken aşamada teşhis edilen rahatsızlıkların tedavisi daha kolaydır." },
+  { english: "recruit", turkish: "işe almak", synonym: "recruit", example: "Şirket yeni proje için üç yazılımcı işe aldı." },
+  { english: "decline", turkish: "azalmak", synonym: "decrease", example: "Son birkaç yılda hava kirliliği oranı belirgin şekilde azaldı." },
+  { english: "crowd", turkish: "kalabalık", synonym: "horde", example: "Meydandaki kalabalık konser başladıktan sonra iyice arttı." },
+  { english: "choose", turkish: "seçmek", synonym: "select", example: "Yarın yapılacak seçimde yeni sınıf başkanını seçeceğiz." },
+  { english: "thief", turkish: "hırsız", synonym: "burglar", example: "Gece vakti dükkana giren hırsız alarm çalınca kaçtı." },
+  { english: "aware of", turkish: "farkında olmak", synonym: "aware of", example: "Yaptığı hatanın büyüklüğünün sonradan farkında oldu." },
+  { english: "responsibility", turkish: "sorumluluk", synonym: "liability", example: "Yeni projenin tüm sorumluluğunu üzerine aldı." },
+  { english: "extinction", turkish: "nesli tükenme", synonym: "disappearance", example: "Bilim insanları nesli tükenme riski yüksek olan bitki türlerini koruma altına aldı." },
+  { english: "accident", turkish: "kaza", synonym: "crash", example: "Otoyolda meydana gelen kaza yüzünden trafik saatlerce aksadı." },
+  { english: "discuss", turkish: "tartışmak", synonym: "debate", example: "İki uzman canlı yayında ekonomi politikalarını tartıştı." },
+  { english: "expect", turkish: "ummak", synonym: "hope", example: "Bütün bu çabalarımızın karşılığını yakın zamanda almayı umuyorum." },
+  { english: "patient", turkish: "hasta", synonym: "case", example: "Hasta adam ilaçlarını aldıktan sonra dinlenmeye çekildi." },
+  { english: "establish", turkish: "kurmak", synonym: "set up", example: "İki girişimci ortak olarak yeni bir şirket kurdu." },
+  { english: "inform", turkish: "bilgi vermek", synonym: "acquaint", example: "Müşteri temsilcisi yeni kampanya hakkında detaylı bilgi verdi." },
+  { english: "blow", turkish: "esmek", synonym: "blow", example: "Gece boyunca denizden tatlı ve serin bir rüzgâr esti." },
+  { english: "rest", turkish: "dinlenme", synonym: "relaxation", example: "Yoğun geçen bir haftanın ardından iyi bir dinlenme şart oldu." },
+  { english: "submit", turkish: "teslim etmek", synonym: "deliver", example: "Kargo görevlisi paketi eve teslim etti." },
+  { english: "mend", turkish: "tamir etmek", synonym: "repair", example: "Ustalar bozulan çamaşır makinesini tamir ediyor." },
+  { english: "distance", turkish: "mesafe", synonym: "distance", example: "İki şehir arasındaki mesafe oldukça uzundu." },
+  { english: "digestive", turkish: "sindirimsel", synonym: "digestive", example: "Yoğurt yemek, sindirimsel sağlığı destekler." },
+  { english: "disorder", turkish: "hastalık", synonym: "illness", example: "Bakteriler, ciddi sindirimsel hastalıklara yol açabilir." },
+  { english: "promote", turkish: "geliştirmek", synonym: "improve", example: "Kendini geliştirmek için her gün yeni bir şeyler öğreniyor." },
+  { english: "side effect", turkish: "yan etki", synonym: "repercussion", example: "Bu ilacın hiçbir yan etkisi yok." },
+  { english: "provide", turkish: "sağlamak", synonym: "ensure", example: "Düzenli uyumak, gün boyu enerjik olmanı sağlar." },
+  { english: "participant", turkish: "katılımcı", synonym: "subscriber", example: "Eğitimi başarıyla tamamlayan her katılımcıya sertifika verildi." },
+  { english: "stem cell", turkish: "kök hücre", synonym: "stem cell", example: "Nakil yapılan kök hücreler, hastanın iyileşme sürecini önemli ölçüde hızlandırdı." },
+  { english: "approach", turkish: "yaklaşmak", synonym: "come close to", example: "Sınav tarihi yaklaştıkça heyecanı daha da arttı." },
+  { english: "attractive", turkish: "çekici", synonym: "appealing", example: "Mıknatısın metaller üzerindeki çekici gücü denetlendi." },
+  { english: "labour", turkish: "emek", synonym: "labour", example: "Büyük bir emek vererek hazırladığı proje ödül kazandı." },
+  { english: "entertaining", turkish: "eğlenceli", synonym: "enjoyable", example: "Dün akşam ailece çok eğlenceli bir film izledik." },
+  { english: "salary", turkish: "maaş", synonym: "wage", example: "Ay başında maaşı yatınca hemen faturaları ödedi." },
+  { english: "carry", turkish: "taşımak", synonym: "transport", example: "Kütüphaneden aldığı ağır kitapları çantasında taşımak onu biraz yordu." },
+  { english: "employee", turkish: "çalışan", synonym: "staff member", example: "Gece vardiyasında çalışan personeller için servis imkanı sunuluyor." },
 ];
