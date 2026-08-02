@@ -508,22 +508,46 @@ html, body {
       currentIndex++;
       renderQuestion();
     }
+function playSuccessSound() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+  
+  notes.forEach((freq, index) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
+    
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + index * 0.12);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.3);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(audioCtx.currentTime + index * 0.12);
+    osc.stop(audioCtx.currentTime + index * 0.12 + 0.3);
+  });
+}
+   function showResults() {
+  const card = document.getElementById("quiz-card");
+  const hasWrong = wrongWords.length > 0;
 
-    function showResults() {
-      const card = document.getElementById("quiz-card");
-      const hasWrong = wrongWords.length > 0;
+  if (!hasWrong) {
+    playSuccessSound();
+  }
 
-      card.innerHTML = `
-        <h2 style="font-size: 26px; margin-bottom: 15px;">Test Tamamlandı! 🎉</h2>
-        <p style="font-size: 18px; margin-bottom: 10px;">Bu Turdaki Skor: <strong>${score} / ${quizWords.length}</strong></p>
-        ${hasWrong ? `<p style="color: #ef4444; font-weight: 600;">Kalan Yanlış Sayısı: <strong>${wrongWords.length}</strong></p>` : '<p style="color: #10b981; font-weight: bold; font-size: 18px;">Tebrikler! Tüm kelimeleri doğru bildiniz. 👏</p>'}
-        
-        ${hasWrong 
-          ? `<button class="action-btn repeat" onclick="startWrongOnlyQuiz()">Sadece Yanlışları Tekrar Et (${wrongWords.length})</button>` 
-          : `<button class="action-btn" onclick="startNewQuiz()">Yeni Test Başlat</button>`
-        }
-      `;
+  card.innerHTML = `
+    <h2 style="font-size: 26px; margin-bottom: 15px;">Test Tamamlandı! 🎉</h2>
+    <p style="font-size: 18px; margin-bottom: 10px;">Bu Turdaki Skor: <strong>${score} / ${quizWords.length}</strong></p>
+    ${hasWrong ? `<p style="color: #ef4444; font-weight: 600;">Kalan Yanlış Sayısı: <strong>${wrongWords.length}</strong></p>` : '<p style="color: #10b981; font-weight: bold; font-size: 18px;">Tebrikler! Tüm kelimeleri doğru bildiniz. 👏</p>'}
+    
+    ${hasWrong 
+      ? `<button class="action-btn repeat" onclick="startWrongOnlyQuiz()">Sadece Yanlışları Tekrar Et (${wrongWords.length})</button>` 
+      : `<button class="action-btn" onclick="startNewQuiz()">Yeni Test Başlat</button>`
     }
+  `;
+}
 
     // HTML inline onclick erişimleri için fonksiyonları window kapsamına ekliyoruz
     window.toggleTheme = toggleTheme;
