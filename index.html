@@ -474,7 +474,29 @@ function playCorrectSound() {
     osc.stop(audioCtx.currentTime + index * 0.08 + 0.2);
   });
 }
-
+function playBeep(isCorrect) {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "sine"; // Ses tonu (sine, square, triangle)
+  if (isCorrect) {
+  
+    osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.2); // 0.2 saniye çalar
+  } else {
+    // Yanlış cevap için pes/kalın ses (220 Hz)
+    osc.frequency.setValueAtTime(220, audioCtx.currentTime); 
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.3); // 0.3 saniye çalar
+  }
+}
 function playWrongSound() {
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   if (!AudioCtx) return;
@@ -497,7 +519,7 @@ function playWrongSound() {
   osc.start(audioCtx.currentTime);
   osc.stop(audioCtx.currentTime + 0.2);
 }
-   function checkAnswer(selectedBtn, isCorrect, currentWord) {
+  function checkAnswer(selectedBtn, isCorrect, currentWord) {
   if (isAnswered) return;
   isAnswered = true;
 
@@ -507,6 +529,7 @@ function playWrongSound() {
   recordAnswer(isCorrect);
 
   if (isCorrect) {
+    playCorrectSound(); // Ses eklendi
     selectedBtn.classList.add("correct");
     score++;
     
@@ -515,16 +538,15 @@ function playWrongSound() {
       renderQuestion();
     }, 700);
   } else {
+    playWrongSound(); // Ses eklendi
     selectedBtn.classList.add("wrong");
     
-    // Metin eşleşmesi yerine dataset kullanmak daha güvenilirdir
     buttons.forEach(btn => {
       if (btn.dataset.answer === currentWord.turkish || btn.textContent.trim() === currentWord.turkish) {
         btn.classList.add("correct");
       }
     });
 
-    // Yanlış kelimeleri mükerrer eklemeden kaydetme
     const isAlreadyAdded = wrongWords.some(w => w.english === currentWord.english);
     if (!isAlreadyAdded) {
       wrongWords.push(currentWord);
@@ -607,7 +629,7 @@ function playSuccessSound() {
   `;
 }
 
-    // HTML inline onclick erişimleri için fonksiyonları window kapsamına ekliyoruz
+    window.checkAnswer = checkAnswer;
     window.toggleTheme = toggleTheme;
     window.resetStats = resetStats;
     window.speakWord = speakWord;
