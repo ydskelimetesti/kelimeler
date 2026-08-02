@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Testi (İpucu Destekli)</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --card-bg: #ffffff;
+      --text-color: #2d3748;
+      --sub-text: #718096;
+      --border-color: #e2e8f0;
+      --btn-bg: #f7fafc;
+      --btn-hover: #edf2f7;
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --sub-text: #94a3b8;
+      --border-color: #334155;
+      --btn-bg: #0f172a;
+      --btn-hover: #334155;
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      transition: background 0.4s ease, color 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .stats-bar {
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--sub-text);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 12px 24px;
+      border-radius: 50px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+    .stats-bar div strong { color: #8b5cf6; }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .reset-btn:hover { opacity: 1; }
+
+    .quiz-card {
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .progress-bar {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #8b5cf6;
+      margin-bottom: 15px;
+    }
+
+    .word-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .word-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0;
+      background: linear-gradient(45deg, #ec4899, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .audio-btn {
+      background: var(--btn-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .audio-btn:hover { transform: scale(1.1); }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-btn {
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      background-color: var(--btn-bg);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-2px);
+      border-color: #8b5cf6;
+    }
+
+    .option-btn.correct {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+      color: white !important;
+      border-color: #10b981 !important;
+    }
+
+    .option-btn.wrong {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+      color: white !important;
+      border-color: #ef4444 !important;
+    }
+
+    .action-btn {
+      margin-top: 20px;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .action-btn.repeat {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      color: #ef4444;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .modal-word {
+      font-size: 24px;
+      font-weight: 800;
+      color: #8b5cf6;
+      margin-bottom: 15px;
+    }
+
+    .hint-container {
+      background: var(--btn-bg);
+      padding: 15px;
+      border-radius: 12px;
+      border-left: 4px solid #f59e0b;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .hint-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--sub-text);
+      margin-bottom: 5px;
+    }
+
+    .hint-text {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+
+  <div class="stats-bar">
+    <div>Toplam: <strong id="stat-total">0</strong></div>
+    <div>Doğru: <strong id="stat-correct">0</strong></div>
+    <div>Başarı: <strong id="stat-rate">%0</strong></div>
+    <button class="reset-btn" onclick="resetStats()" title="İstatistikleri Sıfırla">🗑️</button>
+  </div>
+
+  <div class="quiz-card" id="quiz-card">
+    <div class="progress-bar" id="progress">Soru 1 / 10</div>
+    <div class="word-header">
+      <div class="word-title" id="english-word">Yükleniyor...</div>
+      <button class="audio-btn" onclick="speakWord()" title="Dinle">🔊</button>
+    </div>
+    <div class="options" id="options-container"></div>
+  </div>
+
+  <!-- İpucu Penceresi (Modal) -->
+  <div class="modal-overlay" id="hint-modal">
+    <div class="modal-box">
+      <div class="modal-header">⚠️ Yanlış Cevap!</div>
+      <div class="modal-word" id="modal-target-word">Word</div>
+      
+      <div class="hint-container">
+        <div class="hint-title">💡 Örnek Cümle:</div>
+        <div class="hint-text" id="modal-sentence">"Sample sentence here."</div>
+        
+        <div class="hint-title" id="synonym-title">🔗 Eş Anlamlısı:</div>
+        <div class="hint-text" id="modal-synonym" style="font-style: normal; font-weight: 600; color: #10b981;">-</div>
+      </div>
+
+      <button class="action-btn" id="continue-btn" onclick="closeModal()">İnceledim, Devam Et</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { wordList } from './list.js';
+
+    let currentIndex = 0;
+    let score = 0;
+    let quizWords = [];
+    let wrongWords = [];
+    let isAnswered = false;
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function speakWord() {
+      const currentWord = quizWords[currentIndex];
+      if (currentWord && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(currentWord.english);
+        utterance.lang = 'en-US';
+        speechSynthesis.speak(utterance);
+      }
+    }
+
+    function updateStatsDisplay() {
+      const total = parseInt(localStorage.getItem('totalAnswered') || '0');
+      const correct = parseInt(localStorage.getItem('totalCorrect') || '0');
+      const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-correct').textContent = correct;
+      document.getElementById('stat-rate').textContent = `%${rate}`;
+    }
+
+    function resetStats() {
+      if (confirm("Tüm istatistikleri sıfırlamak istediğinize emin misiniz?")) {
+        localStorage.setItem('totalAnswered', '0');
+        localStorage.setItem('totalCorrect', '0');
+        updateStatsDisplay();
+      }
+    }
+
+    function recordAnswer(isCorrect) {
+      let total = parseInt(localStorage.getItem('totalAnswered') || '0') + 1;
+      let correct = parseInt(localStorage.getItem('totalCorrect') || '0') + (isCorrect ? 1 : 0);
+
+      localStorage.setItem('totalAnswered', total);
+      localStorage.setItem('totalCorrect', correct);
+
+      updateStatsDisplay();
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    function startNewQuiz() {
+      currentIndex = 0;
+      score = 0;
+      wrongWords = [];
+      quizWords = shuffle([...wordList]).slice(0, 10);
+      renderQuestion();
+    }
+
+    function startWrongOnlyQuiz() {
+      currentIndex = 0;
+      score = 0;
+      quizWords = shuffle([...wrongWords]);
+      wrongWords = [];
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      isAnswered = false;
+      const card = document.getElementById("quiz-card");
+      if (currentIndex >= quizWords.length) {
+        showResults();
+        return;
+      }
+
+      const currentWord = quizWords[currentIndex];
+      
+      card.innerHTML = `
+        <div class="progress-bar">Soru ${currentIndex + 1} / ${quizWords.length}</div>
+        <div class="word-header">
+          <div class="word-title">${currentWord.english}</div>
+          <button class="audio-btn" onclick="speakWord()" title="Dinle">🔊</button>
+        </div>
+        <div class="options" id="options-container"></div>
+      `;
+
+      const otherWords = wordList.filter(item => item.english !== currentWord.english);
+      const shuffledOthers = shuffle([...otherWords]).slice(0, 3);
+      const options = shuffle([currentWord, ...shuffledOthers]);
+
+      const container = document.getElementById("options-container");
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = opt.turkish;
+        btn.onclick = () => checkAnswer(btn, opt.turkish === currentWord.turkish, currentWord);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedBtn, isCorrect, currentWord) {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach(btn => btn.disabled = true);
+
+      recordAnswer(isCorrect);
+
+      if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        score++;
+        setTimeout(() => {
+          currentIndex++;
+          renderQuestion();
+        }, 700);
+      } else {
+        selectedBtn.classList.add("wrong");
+        buttons.forEach(btn => {
+          if (btn.textContent.trim() === currentWord.turkish) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (!wrongWords.some(w => w.english === currentWord.english)) {
+          wrongWords.push(currentWord);
+        }
+
+        setTimeout(() => {
+          openModal(currentWord);
+        }, 600);
+      }
+    }
+
+    function openModal(wordObj) {
+      document.getElementById('modal-target-word').textContent = wordObj.english;
+      document.getElementById('modal-sentence').textContent = `"${wordObj.example}"`;
+      
+      const synElem = document.getElementById('modal-synonym');
+      const synTitle = document.getElementById('synonym-title');
+      if (wordObj.synonym) {
+        synElem.textContent = wordObj.synonym;
+        synElem.style.display = "block";
+        synTitle.style.display = "block";
+      } else {
+        synElem.style.display = "none";
+        synTitle.style.display = "none";
+      }
+
+      document.getElementById('hint-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('hint-modal').classList.remove('active');
+      currentIndex++;
+      renderQuestion();
+    }
+
+    function showResults() {
+      const card = document.getElementById("quiz-card");
+      const hasWrong = wrongWords.length > 0;
+
+      card.innerHTML = `
+        <h2 style="font-size: 26px; margin-bottom: 15px;">Test Tamamlandı! 🎉</h2>
+        <p style="font-size: 18px; margin-bottom: 10px;">Bu Turdaki Skor: <strong>${score} / ${quizWords.length}</strong></p>
+        ${hasWrong ? `<p style="color: #ef4444; font-weight: 600;">Kalan Yanlış Sayısı: <strong>${wrongWords.length}</strong></p>` : '<p style="color: #10b981; font-weight: bold; font-size: 18px;">Tebrikler! Tüm kelimeleri doğru bildiniz. 👏</p>'}
+        
+        ${hasWrong 
+          ? `<button class="action-btn repeat" onclick="startWrongOnlyQuiz()">Sadece Yanlışları Tekrar Et (${wrongWords.length})</button>` 
+          : `<button class="action-btn" onclick="startNewQuiz()">Yeni Test Başlat</button>`
+        }
+      `;
+    }
+
+    // HTML inline onclick erişimleri için fonksiyonları window kapsamına ekliyoruz
+    window.toggleTheme = toggleTheme;
+    window.resetStats = resetStats;
+    window.speakWord = speakWord;
+    window.closeModal = closeModal;
+    window.startNewQuiz = startNewQuiz;
+    window.startWrongOnlyQuiz = startWrongOnlyQuiz;
+
+    loadTheme();
+    updateStatsDisplay();
+    startNewQuiz();
+  </script>
+</body>
+</html>
