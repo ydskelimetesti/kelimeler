@@ -566,4 +566,67 @@ export const wordList = [
   { english: "massive", turkish: "çok büyük ve ağır", synonym: "large", example: "The new policy addresses the impact of massive in modern society." },
   { english: "mat", turkish: "paspas", synonym: "mop", example: "The new policy addresses the impact of mat in modern society." },
   { english: "mate", turkish: "arkadaş", synonym: "friend", example: "The new policy addresses the impact of mate in modern society." }
+  { english: "strange", turkish: "tuhaf", synonym: "odd", example: "Bugün ikimizin de aynı gömleği giymiş olması garip bir tesadüftü" }
+  { english: "injure", turkish: "yaralanmak", synonym: "odd", example: "Dünkü futbol maçında dizinden yaralandı." }
+  { english: "pressure", turkish: "baskı", synonym: "pressure", example: "Sınav yaklaştıkça üzerindeki baskı daha da artmaya başladı." }
+  { english: "epidemic", turkish: "salgın", synonym: "contagious", example: "Hijyen kurallarına uymak, bulaşıcı salgınların önüne geçmedeki en etkili yöntemdir." }
+  { english: "consequence", turkish: "sonuç", synonym: "pressure", result: "Sınavın sonuçları açıklanınca herkes derin bir nefes aldı." }
+  { english: "defect", turkish: "kusur", synonym: "pressure", flaw: "Kazada karşı tarafın asli kusurlu olduğu polis raporuyla kesinleşti." }
+  { english: "give up", turkish: "vazgeçmek", synonym: "forego", flaw: "Bütün engellere rağmen hedeflerinden asla vazgeçmedi." }
+  { english: "waste", turkish: "boşa harcamak", synonym: "forego", squander: "Bütün günü sosyal medyada gezinerek boşa harcadı." }
+  { english: "reject", turkish: "reddetmek", synonym: "refuse", squander: "Şirketten gelen cazip iş teklifini nazikçe reddetti." }
+  { english: "generally", turkish: "genellikle", synonym: "in general", squander: "Hafta sonları genellikle erken kalkıp uzun bir yürüyüşe çıkarım." }
+  { english: "occasionally", turkish: "ara ara", synonym: "sometimes", squander: "Yıllar geçmesine rağmen o güzel günleri ara ara hatırlar ve gülüserim." }
+  { english: "rarely", turkish: "nadiren", synonym: "seldom", squander: "Sağlık sorunları dışında toplantılarını nadiren aksatır." }
+  { english: "look for", turkish: "aramak", synonym: "research", squander: "Günlerdir kaybettiği önemli evrakı her yerde arıyor." }
+  { english: "urban", turkish: "kentsel", synonym: "urban", squander: "Kediler kentsel alanlarda kolayca yaşar." }
+  { english: "prohibit", turkish: "yasaklamak", synonym: "proscribe", squander: "Doktor, tatlı yemesini yasakladı." }
+  { english: "infrared", turkish: "kızılötesi", synonym: "infrared", squander: "Gece görüş kameraları kızılötesi ışık kullanır." }
+  { english: "rural", turkish: "kırsal", synonym: "rustic", squander: "Kırsal alanlarda hava çok temizdir." }
+  { english: "dormitory", turkish: "yurt", synonym: "dormitory", squander: "Öğrenciler yeni öğretim yılında yurtta kalacak." }
+  { english: "underestimate", turkish: "önemsememek", synonym: "underestimate", squander: "Söylenen kötü sözleri hiç önemsemedi." }
+  { english: "pollution", turkish: "kirlilik", synonym: "pollution", squander: "Fabrikalar hava kirliliğine neden olur." }
+  { english: "suffer", turkish: "acı çekmek", synonym: "be in pain", squander: "Hastalığı yüzünden aylarca acı çekti." }
+  { english: "assignment", turkish: "ödev", synonym: "homework", squander: "Zor ödevler için arkadaşımdan yardım istedim." }
+  { english: "anchorman", turkish: "sunucu", synonym: "anchorman", squander: "Televizyon sunucusu programı neşeyle başlattı." }
+  { english: "exact", turkish: "aynı", synonym: "exact", squander: "İki elbisenin rengi ve kesimi birebir aynı." }
+  { english: "measure", turkish: "tedbir", synonym: "precaution", squander: "Virüse karşı gerekli tedbirleri aldık." }
+  { english: "raise", turkish: "artırmak", synonym: "increase", squander: "Spor yapmak vücut direncini artırır." }
+  { english: "deer", turkish: "geyik", synonym: "deer", squander: "Ormanda aniden güzel bir geyik belirdi." }
+  { english: "recently", turkish: "şimdiye kadar", synonym: "until now", squander: "Şimdiye kadar okuduğum en etkileyici kitaptı." }
+  { english: "approve", turkish: "onaylamak", synonym: "confirm", squander: "Üyeliğinizi tamamlamak için gelen e-postayı onaylamanız gerekiyor." }
+  { english: "diagnose", turkish: "teşhis etmek", synonym: "diagnose", squander: "Erken aşamada teşhis edilen rahatsızlıkların tedavisi daha kolaydır." }
+  { english: "recruit", turkish: "işe almak", synonym: "recruit", squander: "Şirket yeni proje için üç yazılımcı işe aldı." }
+  { english: "decline", turkish: "azalmak", synonym: "decrease", squander: "Son birkaç yılda hava kirliliği oranı belirgin şekilde azaldı." }
+  { english: "crowd", turkish: "kalabalık", synonym: "horde", squander: "Meydandaki kalabalık konser başladıktan sonra iyice arttı." }
+  { english: "choose", turkish: "seçmek", synonym: "select", squander: "Yarın yapılacak seçimde yeni sınıf başkanını seçeceğiz." }
+  { english: "thief", turkish: "hırsız", synonym: "burglar", squander: "Gece vakti dükkana giren hırsız alarm çalınca kaçtı." }
+  { english: "aware of", turkish: "farkında olmak", synonym: "aware of", squander: "Yaptığı hatanın büyüklüğünün sonradan farkında oldu." }
+  { english: "responsibility", turkish: "sorumluluk", synonym: "liability", squander: "Yeni projenin tüm sorumluluğunu üzerine aldı." }
+  { english: "extinction", turkish: "nesli tükenme", synonym: "disappearance", squander: "Bilim insanları nesli tükenme riski yüksek olan bitki türlerini koruma altına aldı." }
+  { english: "accident", turkish: "kaza", synonym: "crash", squander: "Otoyolda meydana gelen kaza yüzünden trafik saatlerce aksadı." }
+  { english: "discuss", turkish: "tartışmak", synonym: "debate", squander: "İki uzman canlı yayında ekonomi politikalarını tartıştı." }
+  { english: "expect", turkish: "ummak", synonym: "hope", squander: "Bütün bu çabalarımızın karşılığını yakın zamanda almayı umuyorum." }
+  { english: "patient", turkish: "hasta", synonym: "case", squander: "Hasta adam ilaçlarını aldıktan sonra dinlenmeye çekildi." }
+  { english: "establish", turkish: "kurmak", synonym: "set up", squander: "İki girişimci ortak olarak yeni bir şirket kurdu." }
+  { english: "inform", turkish: "bilgi vermek", synonym: "acquaint", squander: "Müşteri temsilcisi yeni kampanya hakkında detaylı bilgi verdi." }
+  { english: "blow", turkish: "esmek", synonym: "blow", squander: "Gece boyunca denizden tatlı ve serin bir rüzgâr esti." }
+  { english: "rest", turkish: "dinlenme", synonym: "relaxation", squander: "Yoğun geçen bir haftanın ardından iyi bir dinlenme şart oldu." }
+  { english: "submit", turkish: "teslim etmek", synonym: "deliver", squander: "Kargo görevlisi paketi eve teslim etti." }
+  { english: "mend", turkish: "tamir etmek", synonym: "repair", squander: "Ustalar bozulan çamaşır makinesini tamir ediyor." }
+  { english: "distance", turkish: "mesafe", synonym: "distance", squander: "İki şehir arasındaki mesafe oldukça uzundu." }
+  { english: "digestive", turkish: "sindirimsel", synonym: "digestive", squander: "Yoğurt yemek, sindirimsel sağlığı destekler." }
+  { english: "disorder", turkish: "hastalık", synonym: "illness", squander: "Bakteriler, ciddi sindirimsel hastalıklara yol açabilir." }
+  { english: "promote", turkish: "geliştirmek", synonym: "improve", squander: "Kendini geliştirmek için her gün yeni bir şeyler öğreniyor." }
+  { english: "side effect", turkish: "yan etki", synonym: "repercussion", squander: "Bu ilacın hiçbir yan etkisi yok." }
+  { english: "provide", turkish: "sağlamak", synonym: "ensure", squander: "Düzenli uyumak, gün boyu enerjik olmanı sağlar." }
+  { english: "participant", turkish: "katılımcı", synonym: "subscriber", squander: "Eğitimi başarıyla tamamlayan her katılımcıya sertifika verildi." }
+  { english: "stem cell", turkish: "kök hücre", synonym: "stem cell", squander: "Nakil yapılan kök hücreler, hastanın iyileşme sürecini önemli ölçüde hızlandırdı." }
+  { english: "approach", turkish: "yaklaşmak", synonym: "come close to", squander: "Sınav tarihi yaklaştıkça heyecanı daha da arttı." }
+  { english: "attractive", turkish: "çekici", synonym: "appealing", squander: "Mıknatısın metaller üzerindeki çekici gücü denetlendi." }
+  { english: "labour", turkish: "emek", synonym: "labour", squander: "Büyük bir emek vererek hazırladığı proje ödül kazandı." }
+  { english: "entertaining", turkish: "eğlenceli", synonym: "enjoyable", squander: "Dün akşam ailece çok eğlenceli bir film izledik." }
+  { english: "salary", turkish: "maaş", synonym: "wage", squander: "Ay başında maaşı yatınca hemen faturaları ödedi." }
+  { english: "carry", turkish: "taşımak", synonym: "transport", squander: "Kütüphaneden aldığı ağır kitapları çantasında taşımak onu biraz yordu." }
+  { english: "employee", turkish: "çalışan", synonym: "staff member", squander: "Gece vardiyasında çalışan personeller için servis imkanı sunuluyor." }
 ];
