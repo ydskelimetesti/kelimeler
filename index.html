@@ -725,9 +725,21 @@ function playSuccessSound() {
     window.startNewQuiz = startNewQuiz;
     window.startWrongOnlyQuiz = startWrongOnlyQuiz;
 
-    loadTheme();
-    updateStatsDisplay();
+  // GÜNCELLENMİŞ KOD
+window.addEventListener('DOMContentLoaded', () => {
+  loadTheme();
+  updateStatsDisplay();
+  
+  if (Array.isArray(wordList) && wordList.length > 0) {
     startNewQuiz();
+  } else {
+    document.getElementById("quiz-card").innerHTML = `
+      <div style="color: #ef4444; font-weight: bold; padding: 20px;">
+        ⚠️ Kelime listesi yüklenemedi! 
+        <br><small style="color: var(--sub-text); font-weight: normal;">list.js dosyasını ve sunucu bağlantınızı kontrol edin.</small>
+      </div>`;
+  }
+});
   </script>
 </body>
 </html>
