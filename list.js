@@ -264,7 +264,7 @@ export const wordList = [
   { english: "decay", turkish: "çürümek", synonym: "decay", example: "Scientists are trying to decay the primary causes of this phenomenon." },
   { english: "decent", turkish: "haklı", synonym: "decent", example: "It is essential to adopt a decent perspective during the evaluation." },
   { english: "decline", turkish: "azaltmak", synonym: "decrease", example: "Scientists are trying to decline the primary causes of this phenomenon." },
-  { english: "decrease", turkish: "azalmak", synonym: "decline", example: "Scientists are trying to decrease the primary causes of this phenomenon." },
+  { english: "decrease", turkish: "azalmak", synonym: "decrease", example: "Scientists are trying to decrease the primary causes of this phenomenon." },
   { english: "default", turkish: "varsayılan", synonym: "default", example: "The new policy addresses the impact of default in modern society." },
   { english: "defer", turkish: "geciktirme", synonym: "delay", example: "The new policy addresses the impact of defer in modern society." },
   { english: "deficit", turkish: "açık", synonym: "shortage", example: "The new policy addresses the impact of deficit in modern society." },
