@@ -509,7 +509,15 @@ html, body {
       renderQuestion();
     }
 function playSuccessSound() {
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+  
+  const audioCtx = new AudioCtx();
+
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
   const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
   
   notes.forEach((freq, index) => {
@@ -529,7 +537,7 @@ function playSuccessSound() {
     osc.stop(audioCtx.currentTime + index * 0.12 + 0.3);
   });
 }
-   function showResults() {
+  function showResults() {
   const card = document.getElementById("quiz-card");
   const hasWrong = wrongWords.length > 0;
 
