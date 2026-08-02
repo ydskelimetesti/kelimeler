@@ -297,6 +297,31 @@ html, body {
       color: var(--text-color);
       margin-bottom: 10px;
     }
+    .hint-header-btn {
+  background: var(--btn-bg);
+  border: 1px solid #f59e0b;
+  color: #f59e0b;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+.hint-header-btn:hover:not(:disabled) {
+  background: #f59e0b;
+  color: white;
+  transform: translateY(-1px);
+}
+.hint-header-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--border-color);
+  color: var(--sub-text);
+}
   </style>
 </head>
 <body>
@@ -344,6 +369,7 @@ html, body {
     let score = 0;
     let quizWords = [];
     let wrongWords = [];
+    let remainingHints = 2;
     let isAnswered = false;
 
     function shuffle(array) {
@@ -401,13 +427,15 @@ html, body {
       document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
     }
 
-    function startNewQuiz() {
-      currentIndex = 0;
-      score = 0;
-      wrongWords = [];
-      quizWords = shuffle([...wordList]).slice(0, 10);
-      renderQuestion();
-    }
+   function startNewQuiz() {
+  currentIndex = 0;
+  score = 0;
+  wrongWords = [];
+  remainingHints = 2; // Hakları yenile
+  isReviewMode = false; // Normal mod
+  quizWords = shuffle([...wordList]).slice(0, 10);
+  renderQuestion();
+}
 
     function startWrongOnlyQuiz() {
       currentIndex = 0;
@@ -418,12 +446,72 @@ html, body {
     }
 
     function renderQuestion() {
-      isAnswered = false;
-      const card = document.getElementById("quiz-card");
-      if (currentIndex >= quizWords.length) {
-        showResults();
-        return;
-      }
+  isAnswered = false;
+  const card = document.getElementById("quiz-card");
+  if (currentIndex >= quizWords.length) {
+    showResults();
+    return;
+  }
+
+  const currentWord = quizWords[currentIndex];
+
+  // Buton durumunu belirleme
+  const isHintDisabled = remainingHints <= 0 || isReviewMode;
+  const hintText = isReviewMode ? "İpucu Yok" : `💡 %50 İpucu (${remainingHints})`;
+
+  card.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <div class="progress-bar" style="margin: 0;">Soru ${currentIndex + 1} / ${quizWords.length}</div>
+      <button class="hint-header-btn" onclick="useFiftyFiftyHint()" ${isHintDisabled ? 'disabled' : ''}>
+        ${hintText}
+      </button>
+    </div>
+    <div class="word-header">
+      <div class="word-title">${currentWord.english}</div>
+      <button class="audio-btn" onclick="speakWord()" title="Dinle">🔊</button>
+    </div>
+    <div class="options" id="options-container"></div>
+  `;
+
+  const otherWords = wordList.filter(item => item.english !== currentWord.english);
+  const shuffledOthers = shuffle([...otherWords]).slice(0, 3);
+  const options = shuffle([currentWord, ...shuffledOthers]);
+
+  const container = document.getElementById("options-container");
+
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.textContent = opt.turkish;
+    btn.onclick = () => checkAnswer(btn, opt.turkish === currentWord.turkish, currentWord);
+    container.appendChild(btn);
+  });
+}
+    function useFiftyFiftyHint() {
+  if (remainingHints <= 0 || isReviewMode || isAnswered) return;
+
+  const currentWord = quizWords[currentIndex];
+  const buttons = Array.from(document.querySelectorAll('.option-btn'));
+
+  // Yanlış olan seçeneklerin butonlarını filtrele
+  const wrongButtons = buttons.filter(btn => btn.textContent.trim() !== currentWord.turkish);
+
+  // Yanlışlardan rastgele 2 tanesini seç ve gizle/pasif yap
+  const shuffledWrong = shuffle(wrongButtons).slice(0, 2);
+  shuffledWrong.forEach(btn => {
+    btn.style.opacity = "0.2";
+    btn.style.pointerEvents = "none";
+  });
+
+  remainingHints--;
+
+  // Buton görünümünü güncelle
+  const hintBtn = document.querySelector('.hint-header-btn');
+  if (hintBtn) {
+    hintBtn.textContent = `💡 %50 İpucu (${remainingHints})`;
+    if (remainingHints <= 0) hintBtn.disabled = true;
+  }
+}
 
       const currentWord = quizWords[currentIndex];
       
@@ -628,7 +716,7 @@ function playSuccessSound() {
     }
   `;
 }
-
+    window.useFiftyFiftyHint = useFiftyFiftyHint;
     window.checkAnswer = checkAnswer;
     window.toggleTheme = toggleTheme;
     window.resetStats = resetStats;
