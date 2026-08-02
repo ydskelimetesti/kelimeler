@@ -450,41 +450,91 @@ html, body {
         container.appendChild(btn);
       });
     }
+function playCorrectSound() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+  const audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
 
-    function checkAnswer(selectedBtn, isCorrect, currentWord) {
-      if (isAnswered) return;
-      isAnswered = true;
+  const notes = [587.33, 880]; // D5 ve A5 notaları
+  notes.forEach((freq, index) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.08);
+    
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime + index * 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.08 + 0.2);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(audioCtx.currentTime + index * 0.08);
+    osc.stop(audioCtx.currentTime + index * 0.08 + 0.2);
+  });
+}
 
-      const buttons = document.querySelectorAll(".option-btn");
-      buttons.forEach(btn => btn.disabled = true);
+function playWrongSound() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+  const audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
 
-      recordAnswer(isCorrect);
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
 
-      if (isCorrect) {
-        selectedBtn.classList.add("correct");
-        score++;
-        setTimeout(() => {
-          currentIndex++;
-          renderQuestion();
-        }, 700);
-      } else {
-        selectedBtn.classList.add("wrong");
-        buttons.forEach(btn => {
-          if (btn.textContent.trim() === currentWord.turkish) {
-            btn.classList.add("correct");
-          }
-        });
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(160, audioCtx.currentTime); // Tok bas ses
+  osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2);
 
-        if (!wrongWords.some(w => w.english === currentWord.english)) {
-          wrongWords.push(currentWord);
-        }
+  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
 
-        setTimeout(() => {
-          openModal(currentWord);
-        }, 600);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start(audioCtx.currentTime);
+  osc.stop(audioCtx.currentTime + 0.2);
+}
+   function checkAnswer(selectedBtn, isCorrect, currentWord) {
+  if (isAnswered) return;
+  isAnswered = true;
+
+  const buttons = document.querySelectorAll(".option-btn");
+  buttons.forEach(btn => btn.disabled = true);
+
+  recordAnswer(isCorrect);
+
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+    
+    setTimeout(() => {
+      currentIndex++;
+      renderQuestion();
+    }, 700);
+  } else {
+    selectedBtn.classList.add("wrong");
+    
+    // Metin eşleşmesi yerine dataset kullanmak daha güvenilirdir
+    buttons.forEach(btn => {
+      if (btn.dataset.answer === currentWord.turkish || btn.textContent.trim() === currentWord.turkish) {
+        btn.classList.add("correct");
       }
+    });
+
+    // Yanlış kelimeleri mükerrer eklemeden kaydetme
+    const isAlreadyAdded = wrongWords.some(w => w.english === currentWord.english);
+    if (!isAlreadyAdded) {
+      wrongWords.push(currentWord);
     }
 
+    setTimeout(() => {
+      openModal(currentWord);
+    }, 600);
+  }
+}
     function openModal(wordObj) {
       document.getElementById('modal-target-word').textContent = wordObj.english;
       document.getElementById('modal-sentence').textContent = `"${wordObj.example}"`;
