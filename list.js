@@ -540,7 +540,6 @@ export const wordList = [
   { english: "litter", turkish: "çöp", synonym: "garbage", example: "The new policy addresses the impact of litter in modern society." },
   { english: "liver", turkish: "karaciğer", synonym: "liver", example: "The new policy addresses the impact of liver in modern society." },
   { english: "loaf", turkish: "bütün ekmek", synonym: "loaf", example: "Scientists are trying to loaf the primary causes of this phenomenon." },
-  { english: "loaf", turkish: "vakti boşa geçirmek", synonym: "not to work", example: "Scientists are trying to loaf the primary causes of this phenomenon." },
   { english: "loan", turkish: "ödünç vermek", synonym: "lending", example: "Scientists are trying to loan the primary causes of this phenomenon." },
   { english: "lobster", turkish: "istakoz", synonym: "lobster", example: "The new policy addresses the impact of lobster in modern society." },
   { english: "locate", turkish: "kurmak", synonym: "locate", example: "Scientists are trying to locate the primary causes of this phenomenon." },
