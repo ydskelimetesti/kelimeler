@@ -297,31 +297,32 @@ html, body {
       color: var(--text-color);
       margin-bottom: 10px;
     }
+
     .hint-header-btn {
-  background: var(--btn-bg);
-  border: 1px solid #f59e0b;
-  color: #f59e0b;
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s ease;
-}
-.hint-header-btn:hover:not(:disabled) {
-  background: #f59e0b;
-  color: white;
-  transform: translateY(-1px);
-}
-.hint-header-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  border-color: var(--border-color);
-  color: var(--sub-text);
-}
+      background: var(--btn-bg);
+      border: 1px solid #f59e0b;
+      color: #f59e0b;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    .hint-header-btn:hover:not(:disabled) {
+      background: #f59e0b;
+      color: white;
+      transform: translateY(-1px);
+    }
+    .hint-header-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: var(--border-color);
+      color: var(--sub-text);
+    }
   </style>
 </head>
 <body>
@@ -370,6 +371,7 @@ html, body {
     let quizWords = [];
     let wrongWords = [];
     let remainingHints = 2;
+    let isReviewMode = false;
     let isAnswered = false;
 
     function shuffle(array) {
@@ -427,96 +429,45 @@ html, body {
       document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
     }
 
-   function startNewQuiz() {
-  currentIndex = 0;
-  score = 0;
-  wrongWords = [];
-  remainingHints = 2; // Hakları yenile
-  isReviewMode = false; // Normal mod
-  quizWords = shuffle([...wordList]).slice(0, 10);
-  renderQuestion();
-}
+    function startNewQuiz() {
+      currentIndex = 0;
+      score = 0;
+      wrongWords = [];
+      remainingHints = 2;
+      isReviewMode = false;
+      quizWords = shuffle([...wordList]).slice(0, 10);
+      renderQuestion();
+    }
 
     function startWrongOnlyQuiz() {
       currentIndex = 0;
       score = 0;
+      isReviewMode = true;
       quizWords = shuffle([...wrongWords]);
       wrongWords = [];
       renderQuestion();
     }
 
     function renderQuestion() {
-  isAnswered = false;
-  const card = document.getElementById("quiz-card");
-  if (currentIndex >= quizWords.length) {
-    showResults();
-    return;
-  }
-
-  const currentWord = quizWords[currentIndex];
-
-  // Buton durumunu belirleme
-  const isHintDisabled = remainingHints <= 0 || isReviewMode;
-  const hintText = isReviewMode ? "İpucu Yok" : `💡 %50 İpucu (${remainingHints})`;
-
-  card.innerHTML = `
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-      <div class="progress-bar" style="margin: 0;">Soru ${currentIndex + 1} / ${quizWords.length}</div>
-      <button class="hint-header-btn" onclick="useFiftyFiftyHint()" ${isHintDisabled ? 'disabled' : ''}>
-        ${hintText}
-      </button>
-    </div>
-    <div class="word-header">
-      <div class="word-title">${currentWord.english}</div>
-      <button class="audio-btn" onclick="speakWord()" title="Dinle">🔊</button>
-    </div>
-    <div class="options" id="options-container"></div>
-  `;
-
-  const otherWords = wordList.filter(item => item.english !== currentWord.english);
-  const shuffledOthers = shuffle([...otherWords]).slice(0, 3);
-  const options = shuffle([currentWord, ...shuffledOthers]);
-
-  const container = document.getElementById("options-container");
-
-  options.forEach(opt => {
-    const btn = document.createElement("button");
-    btn.className = "option-btn";
-    btn.textContent = opt.turkish;
-    btn.onclick = () => checkAnswer(btn, opt.turkish === currentWord.turkish, currentWord);
-    container.appendChild(btn);
-  });
-}
-    function useFiftyFiftyHint() {
-  if (remainingHints <= 0 || isReviewMode || isAnswered) return;
-
-  const currentWord = quizWords[currentIndex];
-  const buttons = Array.from(document.querySelectorAll('.option-btn'));
-
-  // Yanlış olan seçeneklerin butonlarını filtrele
-  const wrongButtons = buttons.filter(btn => btn.textContent.trim() !== currentWord.turkish);
-
-  // Yanlışlardan rastgele 2 tanesini seç ve gizle/pasif yap
-  const shuffledWrong = shuffle(wrongButtons).slice(0, 2);
-  shuffledWrong.forEach(btn => {
-    btn.style.opacity = "0.2";
-    btn.style.pointerEvents = "none";
-  });
-
-  remainingHints--;
-
-  // Buton görünümünü güncelle
-  const hintBtn = document.querySelector('.hint-header-btn');
-  if (hintBtn) {
-    hintBtn.textContent = `💡 %50 İpucu (${remainingHints})`;
-    if (remainingHints <= 0) hintBtn.disabled = true;
-  }
-}
+      isAnswered = false;
+      const card = document.getElementById("quiz-card");
+      if (currentIndex >= quizWords.length) {
+        showResults();
+        return;
+      }
 
       const currentWord = quizWords[currentIndex];
-      
+
+      const isHintDisabled = remainingHints <= 0 || isReviewMode;
+      const hintText = isReviewMode ? "İpucu Yok" : `💡 %50 İpucu (${remainingHints})`;
+
       card.innerHTML = `
-        <div class="progress-bar">Soru ${currentIndex + 1} / ${quizWords.length}</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <div class="progress-bar" style="margin: 0;">Soru ${currentIndex + 1} / ${quizWords.length}</div>
+          <button class="hint-header-btn" onclick="useFiftyFiftyHint()" ${isHintDisabled ? 'disabled' : ''}>
+            ${hintText}
+          </button>
+        </div>
         <div class="word-header">
           <div class="word-title">${currentWord.english}</div>
           <button class="audio-btn" onclick="speakWord()" title="Dinle">🔊</button>
@@ -538,113 +489,117 @@ html, body {
         container.appendChild(btn);
       });
     }
-function playCorrectSound() {
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  if (!AudioCtx) return;
-  const audioCtx = new AudioCtx();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
 
-  const notes = [587.33, 880]; // D5 ve A5 notaları
-  notes.forEach((freq, index) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.08);
-    
-    gain.gain.setValueAtTime(0.1, audioCtx.currentTime + index * 0.08);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.08 + 0.2);
-    
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    
-    osc.start(audioCtx.currentTime + index * 0.08);
-    osc.stop(audioCtx.currentTime + index * 0.08 + 0.2);
-  });
-}
-function playBeep(isCorrect) {
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = "sine"; // Ses tonu (sine, square, triangle)
-  if (isCorrect) {
-  
-    osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
-    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.2); // 0.2 saniye çalar
-  } else {
-    // Yanlış cevap için pes/kalın ses (220 Hz)
-    osc.frequency.setValueAtTime(220, audioCtx.currentTime); 
-    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.3); // 0.3 saniye çalar
-  }
-}
-function playWrongSound() {
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  if (!AudioCtx) return;
-  const audioCtx = new AudioCtx();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
+    function useFiftyFiftyHint() {
+      if (remainingHints <= 0 || isReviewMode || isAnswered) return;
 
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+      const currentWord = quizWords[currentIndex];
+      const buttons = Array.from(document.querySelectorAll('.option-btn'));
 
-  osc.type = 'sawtooth';
-  osc.frequency.setValueAtTime(160, audioCtx.currentTime); // Tok bas ses
-  osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2);
+      const wrongButtons = buttons.filter(btn => btn.textContent.trim() !== currentWord.turkish);
 
-  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+      const shuffledWrong = shuffle(wrongButtons).slice(0, 2);
+      shuffledWrong.forEach(btn => {
+        btn.style.opacity = "0.2";
+        btn.style.pointerEvents = "none";
+      });
 
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
+      remainingHints--;
 
-  osc.start(audioCtx.currentTime);
-  osc.stop(audioCtx.currentTime + 0.2);
-}
-  function checkAnswer(selectedBtn, isCorrect, currentWord) {
-  if (isAnswered) return;
-  isAnswered = true;
-
-  const buttons = document.querySelectorAll(".option-btn");
-  buttons.forEach(btn => btn.disabled = true);
-
-  recordAnswer(isCorrect);
-
-  if (isCorrect) {
-    playCorrectSound(); // Ses eklendi
-    selectedBtn.classList.add("correct");
-    score++;
-    
-    setTimeout(() => {
-      currentIndex++;
-      renderQuestion();
-    }, 700);
-  } else {
-    playWrongSound(); // Ses eklendi
-    selectedBtn.classList.add("wrong");
-    
-    buttons.forEach(btn => {
-      if (btn.dataset.answer === currentWord.turkish || btn.textContent.trim() === currentWord.turkish) {
-        btn.classList.add("correct");
+      const hintBtn = document.querySelector('.hint-header-btn');
+      if (hintBtn) {
+        hintBtn.textContent = `💡 %50 İpucu (${remainingHints})`;
+        if (remainingHints <= 0) hintBtn.disabled = true;
       }
-    });
-
-    const isAlreadyAdded = wrongWords.some(w => w.english === currentWord.english);
-    if (!isAlreadyAdded) {
-      wrongWords.push(currentWord);
     }
 
-    setTimeout(() => {
-      openModal(currentWord);
-    }, 600);
-  }
-}
+    function playCorrectSound() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const notes = [587.33, 880];
+      notes.forEach((freq, index) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.08);
+        
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime + index * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.08 + 0.2);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start(audioCtx.currentTime + index * 0.08);
+        osc.stop(audioCtx.currentTime + index * 0.08 + 0.2);
+      });
+    }
+
+    function playWrongSound() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(160, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2);
+
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.2);
+    }
+
+    function checkAnswer(selectedBtn, isCorrect, currentWord) {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach(btn => btn.disabled = true);
+
+      recordAnswer(isCorrect);
+
+      if (isCorrect) {
+        playCorrectSound();
+        selectedBtn.classList.add("correct");
+        score++;
+        
+        setTimeout(() => {
+          currentIndex++;
+          renderQuestion();
+        }, 700);
+      } else {
+        playWrongSound();
+        selectedBtn.classList.add("wrong");
+        
+        buttons.forEach(btn => {
+          if (btn.dataset.answer === currentWord.turkish || btn.textContent.trim() === currentWord.turkish) {
+            btn.classList.add("correct");
+          }
+        });
+
+        const isAlreadyAdded = wrongWords.some(w => w.english === currentWord.english);
+        if (!isAlreadyAdded) {
+          wrongWords.push(currentWord);
+        }
+
+        setTimeout(() => {
+          openModal(currentWord);
+        }, 600);
+      }
+    }
+
     function openModal(wordObj) {
       document.getElementById('modal-target-word').textContent = wordObj.english;
       document.getElementById('modal-sentence').textContent = `"${wordObj.example}"`;
@@ -668,54 +623,56 @@ function playWrongSound() {
       currentIndex++;
       renderQuestion();
     }
-function playSuccessSound() {
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  if (!AudioCtx) return;
-  
-  const audioCtx = new AudioCtx();
 
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  
-  const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-  
-  notes.forEach((freq, index) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
-    
-    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + index * 0.12);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.3);
-    
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    
-    osc.start(audioCtx.currentTime + index * 0.12);
-    osc.stop(audioCtx.currentTime + index * 0.12 + 0.3);
-  });
-}
-  function showResults() {
-  const card = document.getElementById("quiz-card");
-  const hasWrong = wrongWords.length > 0;
-
-  if (!hasWrong) {
-    playSuccessSound();
-  }
-
-  card.innerHTML = `
-    <h2 style="font-size: 26px; margin-bottom: 15px;">Test Tamamlandı! 🎉</h2>
-    <p style="font-size: 18px; margin-bottom: 10px;">Bu Turdaki Skor: <strong>${score} / ${quizWords.length}</strong></p>
-    ${hasWrong ? `<p style="color: #ef4444; font-weight: 600;">Kalan Yanlış Sayısı: <strong>${wrongWords.length}</strong></p>` : '<p style="color: #10b981; font-weight: bold; font-size: 18px;">Tebrikler! Tüm kelimeleri doğru bildiniz. 👏</p>'}
-    
-    ${hasWrong 
-      ? `<button class="action-btn repeat" onclick="startWrongOnlyQuiz()">Sadece Yanlışları Tekrar Et (${wrongWords.length})</button>` 
-      : `<button class="action-btn" onclick="startNewQuiz()">Yeni Test Başlat</button>`
+    function playSuccessSound() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      
+      const audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      
+      notes.forEach((freq, index) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
+        
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime + index * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start(audioCtx.currentTime + index * 0.12);
+        osc.stop(audioCtx.currentTime + index * 0.12 + 0.3);
+      });
     }
-  `;
-}
+
+    function showResults() {
+      const card = document.getElementById("quiz-card");
+      const hasWrong = wrongWords.length > 0;
+
+      if (!hasWrong) {
+        playSuccessSound();
+      }
+
+      card.innerHTML = `
+        <h2 style="font-size: 26px; margin-bottom: 15px;">Test Tamamlandı! 🎉</h2>
+        <p style="font-size: 18px; margin-bottom: 10px;">Bu Turdaki Skor: <strong>${score} / ${quizWords.length}</strong></p>
+        ${hasWrong ? `<p style="color: #ef4444; font-weight: 600;">Kalan Yanlış Sayısı: <strong>${wrongWords.length}</strong></p>` : '<p style="color: #10b981; font-weight: bold; font-size: 18px;">Tebrikler! Tüm kelimeleri doğru bildiniz. 👏</p>'}
+        
+        ${hasWrong 
+          ? `<button class="action-btn repeat" onclick="startWrongOnlyQuiz()">Sadece Yanlışları Tekrar Et (${wrongWords.length})</button>` 
+          : `<button class="action-btn" onclick="startNewQuiz()">Yeni Test Başlat</button>`
+        }
+      `;
+    }
+
     window.useFiftyFiftyHint = useFiftyFiftyHint;
     window.checkAnswer = checkAnswer;
     window.toggleTheme = toggleTheme;
@@ -725,21 +682,20 @@ function playSuccessSound() {
     window.startNewQuiz = startNewQuiz;
     window.startWrongOnlyQuiz = startWrongOnlyQuiz;
 
-  // GÜNCELLENMİŞ KOD
-window.addEventListener('DOMContentLoaded', () => {
-  loadTheme();
-  updateStatsDisplay();
-  
-  if (Array.isArray(wordList) && wordList.length > 0) {
-    startNewQuiz();
-  } else {
-    document.getElementById("quiz-card").innerHTML = `
-      <div style="color: #ef4444; font-weight: bold; padding: 20px;">
-        ⚠️ Kelime listesi yüklenemedi! 
-        <br><small style="color: var(--sub-text); font-weight: normal;">list.js dosyasını ve sunucu bağlantınızı kontrol edin.</small>
-      </div>`;
-  }
-});
+    window.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      updateStatsDisplay();
+      
+      if (Array.isArray(wordList) && wordList.length > 0) {
+        startNewQuiz();
+      } else {
+        document.getElementById("quiz-card").innerHTML = `
+          <div style="color: #ef4444; font-weight: bold; padding: 20px;">
+            ⚠️ Kelime listesi yüklenemedi! 
+            <br><small style="color: var(--sub-text); font-weight: normal;">list.js dosyasını ve sunucu bağlantınızı kontrol edin.</small>
+          </div>`;
+      }
+    });
   </script>
 </body>
 </html>
