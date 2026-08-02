@@ -1,4 +1,4 @@
-const wordList = [
+export const wordList = [
   { english: "abolish", turkish: "iptal etmek", synonym: "eliminate", example: "The government decided to abolish the tax." },
   { english: "abolition", turkish: "kaldırmak", synonym: "dissolution", example: "They fought for the abolition of unfair laws." },
   { english: "absorb", turkish: "emmek", synonym: "soak up", example: "Sponges absorb water quickly." },
