@@ -5,6 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kelime Testi</title>
   <style>
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.quiz-card, .modal-box {
+  max-width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word; /* Uzun kelimelerin kutu dışına taşmasını engeller */
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  
+  .quiz-card {
+    padding: 20px 15px;
+  }
+  
+  .word-title {
+    font-size: 24px; /* Çok uzun kelimelerde ekrandan taşmaması için fontu küçültür */
+  }
+  
+  .stats-bar {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+}
     :root {
       --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       --card-bg: #ffffff;
